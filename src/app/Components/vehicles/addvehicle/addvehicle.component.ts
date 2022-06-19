@@ -12,6 +12,7 @@ export class AddvehicleComponent implements OnInit {
 
   @Output() addvehicle = new EventEmitter<VehicleData>();
   Form !: FormGroup;
+  
   constructor(private vehiclesService: VehicleService, private formbuilder: FormBuilder) { }
 
   ngOnInit(): void {

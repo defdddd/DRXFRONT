@@ -41,6 +41,7 @@ import { BilingcardComponent } from './Components/profile/bilingcard/bilingcard.
 import { EditprofileComponent } from './Dialogs/editprofile/editprofile.component';
 import { VehiclesComponent } from './Components/vehicles/vehicles.component';
 import { AddvehicleComponent } from './Components/vehicles/addvehicle/addvehicle.component';
+import { VehiclesTableComponent } from './Components/vehicles/vehicles-table/vehicles-table.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { AddvehicleComponent } from './Components/vehicles/addvehicle/addvehicle
     BilingcardComponent,
     EditprofileComponent,
     VehiclesComponent,
-    AddvehicleComponent
+    AddvehicleComponent,
+    VehiclesTableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Profile Form</h2>
+<div mat-dialog-content>
+  <form [formGroup]="this.profileForm" style="overflow-x:auto;">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input  formControlName="userName" matInput placeholder="Ex. User123">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" type="email" matInput placeholder="Ex. pat@example.com">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" type="password" matInput placeholder="Ex. @M3aer1123">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </form>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="warn">Cancel</button>
+  <button mat-button (click)="editUser()" color="primary">Save</button>
+</mat-dialog-actions>

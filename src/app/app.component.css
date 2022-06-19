@@ -1,0 +1,41 @@
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .container1 {
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+  }
+  
+  .sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+  }
+
+  mat-divider {
+    margin-top: 26px;
+    margin-bottom: 16px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+
+  

@@ -14,7 +14,7 @@ export class EditprofileComponent implements OnInit {
   profileForm !: FormGroup;
 
   constructor(@Inject(MAT_DIALOG_DATA) private editData: UserData, private formbuilder: FormBuilder,
-    private userService: UserService, private dialogRef: MatDialogRef<EditprofileComponent>,) { }
+    private userService: UserService, private dialogRef: MatDialogRef<EditprofileComponent>) { }
 
   ngOnInit(): void {
     this.profileForm = this.formbuilder.group({
@@ -24,7 +24,6 @@ export class EditprofileComponent implements OnInit {
     });
 
     if (this.editData) {
-      console.log(this.editData)
       this.profileForm.controls['userName'].setValue(this.editData.userName);
       this.profileForm.controls['password'].setValue(this.editData.password);
       this.profileForm.controls['email'].setValue(this.editData.email);

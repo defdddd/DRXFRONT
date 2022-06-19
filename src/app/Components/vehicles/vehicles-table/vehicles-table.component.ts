@@ -1,8 +1,10 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { EditVehiclesDialogComponent } from 'src/app/Dialogs/edit-vehicles-dialog/edit-vehicles-dialog.component';
 import VehicleData from 'src/app/Models/VehicleData';
 import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 
@@ -19,13 +21,13 @@ export class VehiclesTableComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @Input() changes !: number;
 
-  constructor(private liveAnnouncer: LiveAnnouncer, private vehiclesService: VehicleService) {
+  constructor(private liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private vehiclesService: VehicleService) {
     this.displayedColumns = ["Id", "Type", "Model",'Name','Price Per Minute', "Location", 'Action'];
    }
 
   ngOnInit(): void {    
   }
-  
+
   ngOnChanges(){
     this.setTable();
   }
@@ -37,6 +39,26 @@ export class VehiclesTableComponent implements OnInit {
       this.liveAnnouncer.announce('Sorting cleared');
     }
   }
+
+ editVehicle(element : VehicleData){
+  this.dialog.open(EditVehiclesDialogComponent, {
+    width:"auto",
+    maxWidth:"700px",
+    data: element
+    
+  }).afterClosed().subscribe( val =>
+    {
+      if(val)
+      this.setTable();
+    }   
+  );
+ }
+ deleteVehicle(id: number){
+  this.vehiclesService.delete(id).subscribe(result => {
+    if(result)
+    this.setTable();
+  });
+ }
 
   setTable(){
     this.vehiclesService.getAll().subscribe(data => {

@@ -31,7 +31,9 @@ body {
 p {
     margin: 0
 }
-
+mat-icon {
+    vertical-align: middle;
+}
 .d-flex a {
     text-decoration: none;
     color: #686868;

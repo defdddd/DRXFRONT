@@ -16,5 +16,8 @@ export class VehicleService extends Service<VehicleData> {
    getAvailableVehicles(type: string, model: string){
     return this.http.get<VehicleData[]>(this.URL + `available/${type},${model}`);
    }
+   getAllSearchByVehicles(type: string, model: string){
+    return this.http.get<VehicleData[]>(this.URL + `searchBy/${type},${model}`);
+   }
 
 }

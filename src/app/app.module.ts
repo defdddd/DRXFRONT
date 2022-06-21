@@ -43,6 +43,8 @@ import { VehiclesComponent } from './Components/vehicles/vehicles.component';
 import { AddvehicleComponent } from './Components/vehicles/addvehicle/addvehicle.component';
 import { VehiclesTableComponent } from './Components/vehicles/vehicles-table/vehicles-table.component';
 import { EditVehiclesDialogComponent } from './Dialogs/edit-vehicles-dialog/edit-vehicles-dialog.component';
+import { EditUserDialogComponent } from './Dialogs/edit-user-dialog/edit-user-dialog.component';
+import { EditInoviceDialogComponent } from './Dialogs/edit-inovice-dialog/edit-inovice-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { EditVehiclesDialogComponent } from './Dialogs/edit-vehicles-dialog/edit
     VehiclesComponent,
     AddvehicleComponent,
     VehiclesTableComponent,
-    EditVehiclesDialogComponent
+    EditVehiclesDialogComponent,
+    EditUserDialogComponent,
+    EditInoviceDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,102 @@
-<p>users works!</p>
+
+<div class="container">
+<div class="row" style="margin-top: 20px;">
+    <div class="col">
+        <mat-card>
+            <mat-card-header>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- <form [formGroup]="searchForm">
+                <h5>Search options</h5>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Type</mat-label>
+                      <mat-select formControlName="typeS" (closed)="setTable()" #type matNativeControl required>
+                        <mat-option [value]="'Bike'">Bike
+                        </mat-option>
+                        <mat-option [value]="'Car'">Car
+                        </mat-option>
+                        <mat-option [value]="'Scooter'">Scooter
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Model</mat-label>
+                      <mat-select formControlName="modelS" (closed)="setTable()" #model matNativeControl required>
+                        <mat-option [value]="'Electric'">Electric
+                        </mat-option>
+                        <mat-option [value]="'Normal'">Normal
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form> -->
+          
+              <table mat-table [dataSource]="dataSource" matSort #table (matSortChange)="announceSortChange($event)"
+                class="mat-elevation-z8">
+          
+                <!-- Position Column -->
+                <ng-container matColumnDef="Id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+          
+                <!-- Name Column -->
+                <ng-container matColumnDef="UserName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Type"> UserName </th>
+                  <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="Password">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Password"> Password </th>
+                  <td mat-cell  *matCellDef="let element"> ******** </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="Email">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Email"> Email </th>
+                  <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="Is Admin">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Is Admin">Is Admin </th>
+                  <td mat-cell *matCellDef="let element"> {{element.isAdmin}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="Action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element">
+          
+                    <button mat-icon-button [title]="'edit' | titlecase" (click)="editUser(element)" color="green">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+          
+                    <button mat-icon-button [title]="'delete' | titlecase" (click)="deleteUser(element.id)" color="warn">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+          
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+              </table>
+          
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+              </mat-paginator>
+          
+            </mat-card-content>
+          
+            <mat-card-actions >
+                <mat-card-actions>
+                    <button mat-button (click)="editUser(null)">Insert user</button>
+                </mat-card-actions>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+
+</div>

@@ -72,7 +72,13 @@
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
                             <p class="py-2">Location</p>
-                            <p class="py-2 text-muted"> {{VehicleInfo.location}}</p>
+                            <p class="py-2 text-muted"> 
+                                
+                                <a [href]="getLocation(VehicleInfo.location)">
+                                    <mat-icon>location_on</mat-icon>
+                                    View location 
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>

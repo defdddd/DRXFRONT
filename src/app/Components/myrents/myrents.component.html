@@ -32,11 +32,7 @@
             <td mat-cell *matCellDef="let element"> {{element.rentDate | date}} </td>
           </ng-container>
       
-          <!-- Weight Column -->
-          <ng-container matColumnDef="LastLocation">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by lastLocation"> LastLocation </th>
-            <td mat-cell *matCellDef="let element"> {{element.lastLocation}} </td>
-          </ng-container>
+
 
           <ng-container matColumnDef="IsActive">
             <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by isActive"> IsActive </th>

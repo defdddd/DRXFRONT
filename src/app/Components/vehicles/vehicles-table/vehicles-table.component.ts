@@ -65,6 +65,16 @@ export class VehiclesTableComponent implements OnInit {
         this.setTable();
     });
   }
+  
+  getLocation(location: any) {
+    try {
+      let loc = JSON.parse(location);
+      return `https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`
+
+    } catch {
+      return `https://www.google.com/maps/search/?api=1&query=44.8560084,24.8017449`;
+    }
+  }
 
   private setSearch() {
     if(this.searchForm){

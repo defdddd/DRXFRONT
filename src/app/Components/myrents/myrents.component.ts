@@ -24,23 +24,23 @@ export class MyrentsComponent implements OnInit {
   displayedColumns!: string[];
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  vehicles !: Map<number,VehicleData>;
-  
-  constructor(private liveAnnouncer: LiveAnnouncer, private auth: AuthService, private route: Router, 
+  vehicles !: Map<number, VehicleData>;
+
+  constructor(private liveAnnouncer: LiveAnnouncer, private auth: AuthService, private route: Router,
     private rentService: RentService, private vehicleService: VehicleService, private inoviceService: InoviceService,
-    private bilingService: BilingService) { 
-    this.displayedColumns = ["Id","Vehicle","LastLocation",'Date','IsActive','Action'];
-    this.vehicles = new Map<number,VehicleData>();
+    private bilingService: BilingService) {
+    this.displayedColumns = ["Id", "Vehicle", 'Date', 'IsActive', 'Action'];
+    this.vehicles = new Map<number, VehicleData>();
   }
 
   ngOnInit(): void {
-    if(!this.auth.LoggedIn())
-    this.route.navigate(['/']);
-    else{
+    if (!this.auth.LoggedIn())
+      this.route.navigate(['/']);
+    else {
       this.setRents();
     }
   }
-  
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -50,22 +50,23 @@ export class MyrentsComponent implements OnInit {
   }
 
 
-  endRent(vehicle: number, date: number, rent: RentData){
+  async endRent(vehicle: number, date: number, rent: RentData) {
+    var location = await this.getPosition();
     var vehicleData = this.vehicles.get(vehicle) ?? new VehicleData();
-    var spentTime =  ((Date.now() - date)/ (1000 * 60));
-    var alltoPay  =  Number.parseFloat((spentTime * vehicleData.pricePerMinute).toFixed(2));
-    var hours = Math.floor(spentTime / 60);          
+    var spentTime = ((Date.now() - date) / (1000 * 60));
+    var alltoPay = Number.parseFloat((spentTime * vehicleData.pricePerMinute).toFixed(2));
+    var hours = Math.floor(spentTime / 60);
     var minutes = spentTime % 60;
     Swal.fire({
       icon: 'info',
       title: 'Rent is over',
       text: `For the rent of ${vehicleData.name} your used time 
-      is ${hours.toFixed()} hours and ${minutes.toFixed()} minutes and you have to pay ${(alltoPay + (19 * alltoPay)/100).toFixed(2)} RON`
+      is ${hours.toFixed()} hours and ${minutes.toFixed()} minutes and you have to pay ${(alltoPay + (19 * alltoPay) / 100).toFixed(2)} RON`
     })
 
     this.bilingService.getMyData().subscribe(result => {
 
-      if(result){
+      if (result) {
 
         var inovice = new InoviceData();
         inovice.date = Date.now().toString();
@@ -74,11 +75,10 @@ export class MyrentsComponent implements OnInit {
         inovice.vehicleId = vehicleData.id;
         inovice.bilingId = result.id;
         this.inoviceService.add(inovice).subscribe(value => {
-          if(value)
-          {
+          if (value) {
             rent.isActive = false;
+            rent.lastLocation = JSON.stringify(location);
             this.rentService.update(rent).subscribe(x => {
-              console.log(x)
               this.setRents();
             })
           }
@@ -86,21 +86,34 @@ export class MyrentsComponent implements OnInit {
 
       }
     });
-    
+  }
+
+  getPosition(): Promise<any> {
+    return new Promise((resolve, reject) => {
+
+      navigator.geolocation.getCurrentPosition(resp => {
+
+        resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude });
+      },
+        err => {
+          reject(err);
+        }, { timeout: 1000 });
+    });
 
   }
 
-  private setRents(){
+  private setRents() {
     this.rentService.getMyRents().subscribe(
       (data: RentData[]) => {
         data.forEach(x => {
-          this.vehicleService.getById(x.vehicleId).subscribe( result => {
-          this.vehicles.set(result.id, result);
+          this.vehicleService.getById(x.vehicleId).subscribe(result => {
+            this.vehicles.set(result.id, result);
           })
         })
+
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });
-    }
+  }
 }

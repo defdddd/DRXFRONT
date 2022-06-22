@@ -14,7 +14,7 @@ export class BilingcardComponent implements OnInit {
   bilingObject !: BilingData;
   form !: FormGroup;
   Edit: boolean = false;
-  setInsert: boolean = false;
+  setInsert: boolean = true;
   EditButtonName: string = 'Edit';
 
   constructor(private bilingService: BilingService, private auth: AuthService, private fromBuilder: FormBuilder) {
@@ -27,10 +27,10 @@ export class BilingcardComponent implements OnInit {
       if (value) {
         this.bilingObject = value;
         this.setForm();
-      }
-      else
-        this.setInsert = true;
+        this.setInsert = false;
+      }  
     });
+
   }
 
   setEdit() {
@@ -47,7 +47,6 @@ export class BilingcardComponent implements OnInit {
         bilingData.phone = this.form.value.phone;
         bilingData.userId = this.auth.GetId();
         if (this.setInsert) {
-          this.setInsert = false;
           this.bilingService.add(bilingData).subscribe((x) => this.bilingObject = x);
         }
         else

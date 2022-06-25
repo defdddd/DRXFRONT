@@ -4,12 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import InoviceData from 'src/app/Models/InvoiceData';
+import InvoiceData from 'src/app/Models/InvoiceData';
 import RentData from 'src/app/Models/RentData';
 import VehicleData from 'src/app/Models/VehicleData';
 import { AuthService } from 'src/app/Services/auth.service';
 import { BilingService } from 'src/app/Services/ModelServices/biling.service';
-import { InoviceService } from 'src/app/Services/ModelServices/invoice.service';
+import { InvoiceService } from 'src/app/Services/ModelServices/invoice.service';
 import { RentService } from 'src/app/Services/ModelServices/rent.service';
 import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 import Swal from 'sweetalert2';
@@ -27,7 +27,7 @@ export class MyrentsComponent implements OnInit {
   vehicles !: Map<number, VehicleData>;
 
   constructor(private liveAnnouncer: LiveAnnouncer, private auth: AuthService, private route: Router,
-    private rentService: RentService, private vehicleService: VehicleService, private inoviceService: InoviceService,
+    private rentService: RentService, private vehicleService: VehicleService, private invoiceService: InvoiceService,
     private bilingService: BilingService) {
     this.displayedColumns = ["Id", "Vehicle", 'Date', 'IsActive', 'Action'];
     this.vehicles = new Map<number, VehicleData>();
@@ -68,13 +68,13 @@ export class MyrentsComponent implements OnInit {
 
       if (result) {
 
-        var inovice = new InoviceData();
-        inovice.date = Date.now().toString();
-        inovice.price = alltoPay;
-        inovice.usedTime = spentTime.toString();
-        inovice.vehicleId = vehicleData.id;
-        inovice.bilingId = result.id;
-        this.inoviceService.add(inovice).subscribe(value => {
+        var invoice = new InvoiceData();
+        invoice.date = Date.now().toString();
+        invoice.price = alltoPay;
+        invoice.usedTime = spentTime.toString();
+        invoice.vehicleId = vehicleData.id;
+        invoice.bilingId = result.id;
+        this.invoiceService.add(invoice).subscribe(value => {
           if (value) {
             rent.isActive = false;
             rent.lastLocation = JSON.stringify(location);

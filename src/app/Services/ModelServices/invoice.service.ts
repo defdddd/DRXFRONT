@@ -2,19 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import ApiURL from 'src/app/Helpers/ApiURL';
 import BilingData from 'src/app/Models/BilingData';
-import InoviceData from 'src/app/Models/InvoiceData';
+import InvoiceData from 'src/app/Models/InvoiceData';
 import { Service } from '../AbstractClasses/Service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class InoviceService extends Service<InoviceData>{
+export class InvoiceService extends Service<InvoiceData>{
 
    constructor(http: HttpClient) {
-    super(http, "Inovice/");
+    super(http, "Invoice/");
    }
-   getMyInovices(){
-    return this.http.get<InoviceData[]>(this.URL + 'myInovicedata');
+   getMyInvoices(){
+    return this.http.get<InvoiceData[]>(this.URL + 'myInvoicedata');
   }
 }

@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import BilingData from 'src/app/Models/BilingData';
-import InoviceData from 'src/app/Models/InvoiceData';
+import InvoiceData from 'src/app/Models/InvoiceData';
 import VehicleData from 'src/app/Models/VehicleData';
 import { BilingService } from 'src/app/Services/ModelServices/biling.service';
-import { InoviceService } from 'src/app/Services/ModelServices/invoice.service';
+import { InvoiceService } from 'src/app/Services/ModelServices/invoice.service';
 import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 
 @Component({
@@ -15,19 +15,19 @@ import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 })
 export class EditInvoiceDialogComponent implements OnInit {
 
-  inoviceForm !: FormGroup;
+  invoiceForm !: FormGroup;
   actionBtn: string = "Add";
   vehicleData !: VehicleData[];
   bilingData !: BilingData[];
 
-  constructor(private service: InoviceService, private formbuilder: FormBuilder, private dialogRef: MatDialogRef<EditInvoiceDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private editData: InoviceData, private bilingService: BilingService, private vehicleService: VehicleService) {
+  constructor(private service: InvoiceService, private formbuilder: FormBuilder, private dialogRef: MatDialogRef<EditInvoiceDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private editData: InvoiceData, private bilingService: BilingService, private vehicleService: VehicleService) {
   }
 
   ngOnInit(): void {
     this.bilingService.getAll().subscribe(result => this.bilingData = result);
     this.vehicleService.getAll().subscribe(result => this.vehicleData = result);
-    this.inoviceForm = this.formbuilder.group({
+    this.invoiceForm = this.formbuilder.group({
       bilingId: ['', Validators.required],
       vehicleId: ['', Validators.required],
       price: ['', Validators.required],
@@ -37,38 +37,38 @@ export class EditInvoiceDialogComponent implements OnInit {
 
     if (this.editData) {
       this.actionBtn = "Update";
-      this.inoviceForm.controls['bilingId'].setValue(this.editData.bilingId);
-      this.inoviceForm.controls['vehicleId'].setValue(this.editData.vehicleId);
-      this.inoviceForm.controls['price'].setValue(this.editData.price.toFixed(2));
-      this.inoviceForm.controls['usedTime'].setValue(this.editData.usedTime);
-      this.inoviceForm.controls['date'].setValue((new Date(this.editData.date)));
+      this.invoiceForm.controls['bilingId'].setValue(this.editData.bilingId);
+      this.invoiceForm.controls['vehicleId'].setValue(this.editData.vehicleId);
+      this.invoiceForm.controls['price'].setValue(this.editData.price.toFixed(2));
+      this.invoiceForm.controls['usedTime'].setValue(this.editData.usedTime);
+      this.invoiceForm.controls['date'].setValue((new Date(this.editData.date)));
 
     }
   }
 
   addUser() {
 
-    if (this.inoviceForm.valid) {
+    if (this.invoiceForm.valid) {
 
-      let inovice : InoviceData = this.inoviceForm.value;
+      let invoice : InvoiceData = this.invoiceForm.value;
       if (this.editData){
-        inovice.id = this.editData.id;
+        invoice.id = this.editData.id;
       }else{
-        inovice.id = 0;
+        invoice.id = 0;
       }
-      inovice.date = (new Date(inovice.date)).getTime().toString();
-      console.log(inovice);
+      invoice.date = (new Date(invoice.date)).getTime().toString();
+      console.log(invoice);
       if (this.actionBtn == "Add")
-        this.service.add(inovice).subscribe(data => {
+        this.service.add(invoice).subscribe(data => {
           if (data) {
-            this.inoviceForm.reset();
+            this.invoiceForm.reset();
             this.dialogRef.close(JSON.stringify(data));
           }
         });
       else {
-        this.service.update(inovice).subscribe(data => {
+        this.service.update(invoice).subscribe(data => {
           if (data) {
-            this.inoviceForm.reset();
+            this.invoiceForm.reset();
             this.dialogRef.close(JSON.stringify(data));
           }
         });

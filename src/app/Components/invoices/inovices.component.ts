@@ -6,17 +6,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { EditInvoiceDialogComponent } from 'src/app/Dialogs/edit-inovice-dialog/edit-invoice-dialog.component';
-import InoviceData from 'src/app/Models/InvoiceData';
+import InvoiceData from 'src/app/Models/InvoiceData';
 import VehicleData from 'src/app/Models/VehicleData';
 import { AuthService } from 'src/app/Services/auth.service';
-import { InoviceService } from 'src/app/Services/ModelServices/invoice.service';
+import { InvoiceService } from 'src/app/Services/ModelServices/invoice.service';
 import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { BilingService } from 'src/app/Services/ModelServices/biling.service';
 import BilingData from 'src/app/Models/BilingData';
+import { EditInvoiceDialogComponent } from 'src/app/Dialogs/edit-inovice-dialog/edit-invoice-dialog.component';
 
 @Component({
   selector: 'app-invoices',
@@ -25,14 +25,14 @@ import BilingData from 'src/app/Models/BilingData';
 })
 export class InvoicesComponent implements OnInit {
 
-  dataSource !: MatTableDataSource<InoviceData>;
+  dataSource !: MatTableDataSource<InvoiceData>;
   searchForm !: FormGroup;
   displayedColumns!: string[];
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   vehicles !: Map<number, VehicleData>;
   biling !: Map<number, BilingData>;
-  constructor(private authService: AuthService, private route: Router, private inoviceService: InoviceService, private dialog: MatDialog,
+  constructor(private authService: AuthService, private route: Router, private invoiceService: InvoiceService, private dialog: MatDialog,
      private vehicleService: VehicleService, private liveAnnouncer: LiveAnnouncer, private bilingService: BilingService) {
     this.displayedColumns = ["Id", "User", "Vehicle", "Date", "Action"];
     this.vehicles = new Map<number, VehicleData>();
@@ -50,7 +50,7 @@ export class InvoicesComponent implements OnInit {
 
   }
 
-  editInovice(element: any) {
+  editInvoice(element: any) {
     this.dialog.open(EditInvoiceDialogComponent, {
       width: "auto",
       maxWidth: "700px",
@@ -62,15 +62,15 @@ export class InvoicesComponent implements OnInit {
     }
     );
   }
-  deleteInovice(id: number) {
-    this.inoviceService.delete(id).subscribe(result => {
+  deleteInvoice(id: number) {
+    this.invoiceService.delete(id).subscribe(result => {
       if (result)
         this.setTable();
     });
   }
   setTable() {
-    this.setInovices();
-      this.inoviceService.getAll().subscribe(data => {
+    this.setInvoices();
+      this.invoiceService.getAll().subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -84,14 +84,14 @@ export class InvoicesComponent implements OnInit {
     }
   }
 
-  getInovicePdf(rent: InoviceData, vehicleId: number, inoiceNo: number) {
+  getInvoicePdf(rent: InvoiceData, vehicleId: number, inoiceNo: number) {
     let vehicle = this.vehicles.get(vehicleId) ?? new VehicleData();
     this.setPdf(rent, vehicle, inoiceNo);
   }
 
-  private setInovices() {
-    this.inoviceService.getAll().subscribe(
-      (data: InoviceData[]) => {
+  private setInvoices() {
+    this.invoiceService.getAll().subscribe(
+      (data: InvoiceData[]) => {
         data.forEach(x => {
 
           this.vehicleService.getById(x.vehicleId).subscribe(result => {
@@ -108,7 +108,7 @@ export class InvoicesComponent implements OnInit {
       });
   }
 
-  private setPdf(rent: InoviceData, vehicle: VehicleData, inoiceNo: number) {
+  private setPdf(rent: InvoiceData, vehicle: VehicleData, inoiceNo: number) {
     let bilingData : BilingData = this.biling.get(rent.bilingId) ?? new BilingData();
     let docDefinition: TDocumentDefinitions = {
       content: [
@@ -204,7 +204,7 @@ export class InvoicesComponent implements OnInit {
         }
       }
     };
-    pdfMake.createPdf(docDefinition).download(`InoviceWithNumber${inoiceNo}.pdf`);
+    pdfMake.createPdf(docDefinition).download(`InvoiceWithNumber${inoiceNo}.pdf`);
   }
 
 

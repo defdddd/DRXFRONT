@@ -1,4 +1,4 @@
-export default class InoviceData {
+export default class InvoiceData {
     id: number = 0;
     bilingId: number = 0;
     vehicleId: number = 0;

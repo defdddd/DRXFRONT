@@ -6,11 +6,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { EditInoviceDialogComponent } from 'src/app/Dialogs/edit-inovice-dialog/edit-inovice-dialog.component';
-import InoviceData from 'src/app/Models/InoviceData';
+import { EditInvoiceDialogComponent } from 'src/app/Dialogs/edit-inovice-dialog/edit-invoice-dialog.component';
+import InoviceData from 'src/app/Models/InvoiceData';
 import VehicleData from 'src/app/Models/VehicleData';
 import { AuthService } from 'src/app/Services/auth.service';
-import { InoviceService } from 'src/app/Services/ModelServices/inovice.service';
+import { InoviceService } from 'src/app/Services/ModelServices/invoice.service';
 import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -19,11 +19,11 @@ import { BilingService } from 'src/app/Services/ModelServices/biling.service';
 import BilingData from 'src/app/Models/BilingData';
 
 @Component({
-  selector: 'app-inovices',
-  templateUrl: './inovices.component.html',
-  styleUrls: ['./inovices.component.css']
+  selector: 'app-invoices',
+  templateUrl: './invoices.component.html',
+  styleUrls: ['./invoices.component.css']
 })
-export class InovicesComponent implements OnInit {
+export class InvoicesComponent implements OnInit {
 
   dataSource !: MatTableDataSource<InoviceData>;
   searchForm !: FormGroup;
@@ -51,7 +51,7 @@ export class InovicesComponent implements OnInit {
   }
 
   editInovice(element: any) {
-    this.dialog.open(EditInoviceDialogComponent, {
+    this.dialog.open(EditInvoiceDialogComponent, {
       width: "auto",
       maxWidth: "700px",
       data: element

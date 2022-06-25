@@ -32,9 +32,9 @@ import { ProfileComponent } from './Components/profile/profile.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { HomeComponent } from './Components/home/home.component';
 import { MyrentsComponent } from './Components/myrents/myrents.component';
-import { MyinovicesComponent } from './Components/myinovices/myinovices.component';
+import { MyinvoicesComponent } from './Components/myinvoices/myinvoices.component';
 import { UsersComponent } from './Components/users/users.component';
-import { InovicesComponent } from './Components/inovices/inovices.component';
+import { InvoicesComponent } from './Components/invoices/inovices.component';
 import { RentsComponent } from './Components/rents/rents.component';
 import { RentcardComponent } from './Components/profile/rentcard/rentcard.component';
 import { BilingcardComponent } from './Components/profile/bilingcard/bilingcard.component';
@@ -44,7 +44,7 @@ import { AddvehicleComponent } from './Components/vehicles/addvehicle/addvehicle
 import { VehiclesTableComponent } from './Components/vehicles/vehicles-table/vehicles-table.component';
 import { EditVehiclesDialogComponent } from './Dialogs/edit-vehicles-dialog/edit-vehicles-dialog.component';
 import { EditUserDialogComponent } from './Dialogs/edit-user-dialog/edit-user-dialog.component';
-import { EditInoviceDialogComponent } from './Dialogs/edit-inovice-dialog/edit-inovice-dialog.component';
+import { EditInvoiceDialogComponent } from './Dialogs/edit-inovice-dialog/edit-invoice-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,9 +55,9 @@ import { EditInoviceDialogComponent } from './Dialogs/edit-inovice-dialog/edit-i
     ForgotpasswordComponent,
     HomeComponent,
     MyrentsComponent,
-    MyinovicesComponent,
+    MyinvoicesComponent,
     UsersComponent,
-    InovicesComponent,
+    InvoicesComponent,
     RentsComponent,
     RentcardComponent,
     BilingcardComponent,
@@ -67,7 +67,7 @@ import { EditInoviceDialogComponent } from './Dialogs/edit-inovice-dialog/edit-i
     VehiclesTableComponent,
     EditVehiclesDialogComponent,
     EditUserDialogComponent,
-    EditInoviceDialogComponent
+    EditInvoiceDialogComponent
   ],
   imports: [
     BrowserModule,

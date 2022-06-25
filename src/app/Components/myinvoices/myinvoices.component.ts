@@ -4,10 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import InoviceData from 'src/app/Models/InoviceData';
+import InoviceData from 'src/app/Models/InvoiceData';
 import VehicleData from 'src/app/Models/VehicleData';
 import { AuthService } from 'src/app/Services/auth.service';
-import { InoviceService } from 'src/app/Services/ModelServices/inovice.service';
+import { InoviceService } from 'src/app/Services/ModelServices/invoice.service';
 import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 import { BilingService } from 'src/app/Services/ModelServices/biling.service';
 import BilingData from 'src/app/Models/BilingData';
@@ -20,11 +20,11 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
-  selector: 'app-myinovices',
-  templateUrl: './myinovices.component.html',
-  styleUrls: ['./myinovices.component.css']
+  selector: 'app-myinvoices',
+  templateUrl: './myinvoices.component.html',
+  styleUrls: ['./myinvoices.component.css']
 })
-export class MyinovicesComponent implements OnInit {
+export class MyinvoicesComponent implements OnInit {
   dataSource !: MatTableDataSource<InoviceData>;
   displayedColumns!: string[];
   @ViewChild(MatPaginator) paginator !: MatPaginator;

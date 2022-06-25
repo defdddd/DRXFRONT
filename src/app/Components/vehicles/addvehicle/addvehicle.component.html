@@ -1,17 +1,19 @@
-<mat-card>
-    <mat-card-header>
-        <h5>
-            Add Vehicle
-        </h5>
-    </mat-card-header>
-    <mat-card-content>
-            <form [formGroup]="this.Form">
-                <div class="container">
-                    <div class="row">
-                      <div class="col">
+    <mat-card>
+        <mat-card-header class="card-header" style="background-color: rgb(14, 88, 152);" >
+            <mat-card-title>
+                Add Vehicle
+            </mat-card-title>
+            <mat-card-subtitle>
+                Here you can add easily a vehicle
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="this.Form" style="margin-top: 10px;">
+                <div class="row">
+                    <div class="col">
                         <mat-form-field appearance="fill">
                             <mat-label>Type</mat-label>
-                            <mat-select  formControlName="type"  #type matNativeControl required>
+                            <mat-select formControlName="type" #type matNativeControl required>
                                 <mat-option [value]="'Bike'">Bike
                                 </mat-option>
                                 <mat-option [value]="'Car'">Car
@@ -20,52 +22,48 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                      </div>
-                      <div class="col">
+                    </div>
+                    <div class="col">
                         <mat-form-field appearance="fill">
                             <mat-label>Model</mat-label>
-                            <mat-select  formControlName="model" #model matNativeControl required>
+                            <mat-select formControlName="model" #model matNativeControl required>
                                 <mat-option [value]="'Electric'">Electric
                                 </mat-option>
                                 <mat-option [value]="'Normal'">Normal
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                      </div>
                     </div>
-                    <div class="row">
-                      <div class="col">
+                </div>
+                <div class="row">
+                    <div class="col">
                         <mat-form-field appearance="outline">
                             <mat-label>Name</mat-label>
-                            <input  formControlName="name" matInput >
+                            <input formControlName="name" matInput>
                             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                         </mat-form-field>
-                    
-                      </div>
-                      <div class="col">
+    
+                    </div>
+                    <div class="col">
                         <mat-form-field appearance="outline">
                             <mat-label>Price per minute (RON)</mat-label>
-                            <input  type ="number" formControlName="pricePerMinute" matInput >
+                            <input type="number" formControlName="pricePerMinute" matInput>
                             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                         </mat-form-field>
-                      </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Location </mat-label>
-                                <input  formControlName="location" matInput >
-                                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                            </mat-form-field>
-                        </div>  
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Location </mat-label>
+                            <input formControlName="location" matInput>
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        </mat-form-field>
                     </div>
-                  </div>
-            </form>   
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button (click)="add()">Add vehicle</button>
-    </mat-card-actions>
-</mat-card>
-
-
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="add()">Add vehicle</button>
+        </mat-card-actions>
+    </mat-card>

@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private authService: AuthService, private route: Router, private userService: UserService, private dialog: MatDialog, private liveAnnouncer: LiveAnnouncer) {
-    this.displayedColumns = ["Id", "UserName", "Password", 'Email', 'Is Admin', 'Action'];
+    this.displayedColumns = ["Id", "UserName", 'Email', 'Is Admin', 'Action'];
    }
 
   ngOnInit(): void {

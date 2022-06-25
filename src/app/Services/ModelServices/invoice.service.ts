@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import ApiURL from 'src/app/Helpers/ApiURL';
 import BilingData from 'src/app/Models/BilingData';
-import InoviceData from 'src/app/Models/InoviceData';
+import InoviceData from 'src/app/Models/InvoiceData';
 import { Service } from '../AbstractClasses/Service';
 
 

@@ -2,25 +2,25 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import BilingData from 'src/app/Models/BilingData';
-import InoviceData from 'src/app/Models/InoviceData';
+import InoviceData from 'src/app/Models/InvoiceData';
 import VehicleData from 'src/app/Models/VehicleData';
 import { BilingService } from 'src/app/Services/ModelServices/biling.service';
-import { InoviceService } from 'src/app/Services/ModelServices/inovice.service';
+import { InoviceService } from 'src/app/Services/ModelServices/invoice.service';
 import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 
 @Component({
-  selector: 'app-edit-inovice-dialog',
-  templateUrl: './edit-inovice-dialog.component.html',
-  styleUrls: ['./edit-inovice-dialog.component.css']
+  selector: 'app-edit-invoice-dialog',
+  templateUrl: './edit-invoice-dialog.component.html',
+  styleUrls: ['./edit-invoice-dialog.component.css']
 })
-export class EditInoviceDialogComponent implements OnInit {
+export class EditInvoiceDialogComponent implements OnInit {
 
   inoviceForm !: FormGroup;
   actionBtn: string = "Add";
   vehicleData !: VehicleData[];
   bilingData !: BilingData[];
 
-  constructor(private service: InoviceService, private formbuilder: FormBuilder, private dialogRef: MatDialogRef<EditInoviceDialogComponent>,
+  constructor(private service: InoviceService, private formbuilder: FormBuilder, private dialogRef: MatDialogRef<EditInvoiceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private editData: InoviceData, private bilingService: BilingService, private vehicleService: VehicleService) {
   }
 

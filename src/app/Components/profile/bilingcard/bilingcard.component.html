@@ -1,52 +1,57 @@
-<mat-card class="card">
-    <div class="col-md-12 my_activity-slot user-dashboard-slot">
-        <div class="panel panel-default user-account-panel no-footer my-activity-panel">
-            <div class="panel-body">
-                <h3 class="mrg-top-none mrg-btm-sm">
-                    Biling data
-                    <button mat-button (click)="setEdit()" style="margin-left: 78%;" color="primary">
-                        {{EditButtonName}}
-                    </button>
-                </h3>
-                <div class="row">
-                    <div class="col-12 ">
-                        <form [formGroup]="this.form">
-                            <div class="d-flex align-items-center justify-content-between border-bottom">
-                                <p *ngIf="!Edit" class="py-2">Full Name</p>
-                                <p *ngIf="!Edit" class="py-2 text-muted">{{bilingObject.fullName}}</p>
-                                <mat-form-field *ngIf="Edit" appearance="standard">
-                                    <mat-label>Full Name</mat-label>
-                                    <input formControlName="fullName" matInput type="text" class="fadeIn second">
-                                </mat-form-field>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between border-bottom">
-                                <p *ngIf="!Edit" class="py-2">Email</p>
-                                <p *ngIf="!Edit" class="py-2 text-muted">{{bilingObject.email}}</p>
-                                <mat-form-field *ngIf="Edit" appearance="standard">
-                                    <mat-label>Email</mat-label>
-                                    <input formControlName="email" matInput type="text" class="fadeIn second">
-                                </mat-form-field>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between border-bottom">
-                                <p *ngIf="!Edit" class="py-2">Adress</p>
-                                <p *ngIf="!Edit" class="py-2 text-muted">{{bilingObject.adress}}</p>
-                                <mat-form-field *ngIf="Edit" appearance="standard">
-                                    <mat-label>Adress</mat-label>
-                                    <input formControlName="adress" matInput type="text" class="fadeIn second">
-                                </mat-form-field>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between ">
-                                <p *ngIf="!Edit" class="py-2">Phone</p>
-                                <p *ngIf="!Edit" class="py-2 text-muted">{{bilingObject.phone}}</p>
-                                <mat-form-field *ngIf="Edit" appearance="standard">
-                                    <mat-label>Phone</mat-label>
-                                    <input formControlName="phone" matInput type="text" class="fadeIn second">
-                                </mat-form-field>
-                            </div>
-                        </form>
+<mat-card>
+    <mat-card-content>
+        <div class="col">
+            <div>
+                <div>
+                    <h3>
+                        Biling data
+                    </h3>
+                    <div class="row">
+                        <div class="col">
+                            <form [formGroup]="this.form">
+                                <div class="d-flex align-items-center justify-content-between border-bottom">
+                                    <p *ngIf="!Edit" class="py-2">Full Name</p>
+                                    <p *ngIf="!Edit" class="py-2 text-muted">{{bilingObject.fullName}}</p>
+                                    <mat-form-field *ngIf="Edit" appearance="standard">
+                                        <mat-label>Full Name</mat-label>
+                                        <input formControlName="fullName" matInput type="text" class="fadeIn second">
+                                    </mat-form-field>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-bottom">
+                                    <p *ngIf="!Edit" class="py-2">Email</p>
+                                    <p *ngIf="!Edit" class="py-2 text-muted">{{bilingObject.email}}</p>
+                                    <mat-form-field *ngIf="Edit" appearance="standard">
+                                        <mat-label>Email</mat-label>
+                                        <input formControlName="email" matInput type="text" class="fadeIn second">
+                                    </mat-form-field>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-bottom">
+                                    <p *ngIf="!Edit" class="py-2">Adress</p>
+                                    <p *ngIf="!Edit" class="py-2 text-muted">{{bilingObject.adress}}</p>
+                                    <mat-form-field *ngIf="Edit" appearance="standard">
+                                        <mat-label>Adress</mat-label>
+                                        <input formControlName="adress" matInput type="text" class="fadeIn second">
+                                    </mat-form-field>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between ">
+                                    <p *ngIf="!Edit" class="py-2">Phone</p>
+                                    <p *ngIf="!Edit" class="py-2 text-muted">{{bilingObject.phone}}</p>
+                                    <mat-form-field *ngIf="Edit" appearance="standard">
+                                        <mat-label>Phone</mat-label>
+                                        <input formControlName="phone" matInput type="text" class="fadeIn second">
+                                    </mat-form-field>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-button (click)="setEdit()" color="primary">
+            {{EditButtonName}}
+        </button>
+    </mat-card-actions>
 </mat-card>

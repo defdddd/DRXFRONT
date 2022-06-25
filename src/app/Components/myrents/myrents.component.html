@@ -1,15 +1,16 @@
-<mat-card>
-  <mat-card-header class="card-header" style="background-color: rgb(14, 109, 77);">
-    <mat-card-title>
-      My Rents
-    </mat-card-title>
-    <mat-card-subtitle>
-      View and set off a rent
-    </mat-card-subtitle>
-  </mat-card-header>
+<div class="col">
+  <mat-card>
+    <mat-card-header class="card-header" style="background-color: rgb(14, 109, 77);">
+      <mat-card-title>
+        My Rents
+      </mat-card-title>
+      <mat-card-subtitle>
+        View and set off a rent
+      </mat-card-subtitle>
+    </mat-card-header>
 
-  <mat-card-content>
-    <!-- <form [formGroup]="this.searchForm" >
+    <mat-card-content>
+      <!-- <form [formGroup]="this.searchForm" >
         <mat-form-field appearance="fill" >
           <mat-label>Appointments from</mat-label>
           <mat-icon matPrefix>settings</mat-icon>
@@ -22,55 +23,56 @@
         </form> -->
 
 
-    <table mat-table [dataSource]="dataSource" matSort #table (matSortChange)="announceSortChange($event)"
-      class="mat-elevation-z8">
-      <!-- Position Column -->
-      <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
+      <table mat-table [dataSource]="dataSource" matSort #table (matSortChange)="announceSortChange($event)"
+        class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="Id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="Vehicle">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by vehicle"> Vehicle </th>
-        <td mat-cell *matCellDef="let element"> {{vehicles.get(element.vehicleId)?.name}} </td>
-      </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="Vehicle">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by vehicle"> Vehicle </th>
+          <td mat-cell *matCellDef="let element"> {{vehicles.get(element.vehicleId)?.name}} </td>
+        </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="Date">
-        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by date"> Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.rentDate | date}} </td>
-      </ng-container>
-
-
-
-      <ng-container matColumnDef="IsActive">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by isActive"> IsActive </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.isActive" style="color: green;">check</mat-icon>
-          <mat-icon *ngIf="!element.isActive" color="warn"> close</mat-icon>
-        </td>
-      </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Date">
+          <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by date"> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.rentDate | date}} </td>
+        </ng-container>
 
 
-      <ng-container matColumnDef="Action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
 
-          <button mat-icon-button [disabled]="!element.isActive"
-            (click)="endRent(element.vehicleId, element.rentDate, element)" [title]="'End rent' | titlecase"
-            color="warn">
-            <mat-icon>highlight_off</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="IsActive">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by isActive"> IsActive </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon *ngIf="element.isActive" style="color: green;">check</mat-icon>
+            <mat-icon *ngIf="!element.isActive" color="warn"> close</mat-icon>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    </table>
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
-    </mat-paginator>
-  </mat-card-content>
-</mat-card>
+            <button mat-icon-button [disabled]="!element.isActive"
+              (click)="endRent(element.vehicleId, element.rentDate, element)" [title]="'End rent' | titlecase"
+              color="warn">
+              <mat-icon>highlight_off</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

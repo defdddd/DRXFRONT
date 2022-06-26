@@ -1,89 +1,84 @@
 <mat-card>
+    <mat-card-header class="card-header" style="background-color: rgb(20, 116, 71); margin-bottom: 20px;">
+        <mat-card-title>
+            Rent a vehicle
+        </mat-card-title>
+        <mat-card-subtitle>
+            View available vehicles and rent
+        </mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <h3>
-                            Rent a vehicle
-                        </h3>
-                        <div style="margin-top: 30px;">
-                            <form [formGroup]="this.Form">
-                                <h5>Select a Model</h5>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Vehicle</mat-label>
-                                    <mat-select  formControlName="model" #model matNativeControl (closed)="setModel(model.value)" required>
-                                        <mat-option [value]="'Electric'">Electric
-                                        </mat-option>
-                                        <mat-option [value]="'Normal'">Normal
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                <h5>Select a type</h5>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Vehicle</mat-label>
-                                    <mat-select  formControlName="type"  #type matNativeControl (closed)="setType(type.value)" required>
-                                        <mat-option [value]="'Bike'">Bike
-                                        </mat-option>
-                                        <mat-option [value]="'Car'">Car
-                                        </mat-option>
-                                        <mat-option [value]="'Scooter'">Scooter
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                <div *ngIf="Model && Type">
-                                    <h5>Chosee a vehicle</h5>
-                                    <mat-form-field appearance="fill">
-                                        <mat-label>Vehicle</mat-label>
-                                        <mat-select  formControlName="vehicle" #select matNativeControl (closed)="infoVehicle(select.value) "
-                                            required>
-                                            <mat-option *ngFor="let item of AvailableVehicles" [value]="item.id">
-                                                {{item.name
-                                                + " (" + item.type +")"}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </form>
-                        </div>
+        <div class="col">
+            <form [formGroup]="this.Form">
+                <h5>Select a Model</h5>
+                <mat-form-field appearance="fill">
+                    <mat-label>Vehicle</mat-label>
+                    <mat-select formControlName="model" #model matNativeControl (closed)="setModel(model.value)"
+                        required>
+                        <mat-option [value]="'Electric'">Electric
+                        </mat-option>
+                        <mat-option [value]="'Normal'">Normal
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <h5>Select a type</h5>
+                <mat-form-field appearance="fill">
+                    <mat-label>Vehicle</mat-label>
+                    <mat-select formControlName="type" #type matNativeControl (closed)="setType(type.value)" required>
+                        <mat-option [value]="'Bike'">Bike
+                        </mat-option>
+                        <mat-option [value]="'Car'">Car
+                        </mat-option>
+                        <mat-option [value]="'Scooter'">Scooter
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div *ngIf="Model && Type">
+                    <h5>Chosee a vehicle</h5>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Vehicle</mat-label>
+                        <mat-select formControlName="vehicle" #select matNativeControl
+                            (closed)="infoVehicle(select.value) " required>
+                            <mat-option *ngFor="let item of AvailableVehicles" [value]="item.id">
+                                {{item.name
+                                + " (" + item.type +")"}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
 
-                    </div>
-                </div>
+        <div class="col" style="margin-top: 30px;">
+            <h5>Vehicle info</h5>
+            <div class="d-flex align-items-center justify-content-between border-bottom">
+                <p class="py-2">Type</p>
+                <p class="py-2 text-muted">{{VehicleInfo.type}}</p>
             </div>
-            <div class="col">
-                <div class="row">
-                    <div class="col" style="margin-top: 60px;">
-                        <h5>Vehicle info</h5>
-                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                            <p class="py-2">Type</p>
-                            <p class="py-2 text-muted">{{VehicleInfo.type}}</p>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                            <p class="py-2">Model</p>
-                            <p class="py-2 text-muted">{{VehicleInfo.model}}</p>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                            <p class="py-2">Name</p>
-                            <p class="py-2 text-muted">{{VehicleInfo.name}}</p>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                            <p class="py-2">Price per minute</p>
-                            <p class="py-2 text-muted">{{VehicleInfo.pricePerMinute.toFixed(2)}} RON</p>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between">
-                            <p class="py-2">Location</p>
-                            <p class="py-2 text-muted"> 
-                                
-                                <a [href]="getLocation(VehicleInfo.location)">
-                                    <mat-icon>location_on</mat-icon>
-                                    View location 
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="d-flex align-items-center justify-content-between border-bottom">
+                <p class="py-2">Model</p>
+                <p class="py-2 text-muted">{{VehicleInfo.model}}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between border-bottom">
+                <p class="py-2">Name</p>
+                <p class="py-2 text-muted">{{VehicleInfo.name}}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between border-bottom">
+                <p class="py-2">Price per minute</p>
+                <p class="py-2 text-muted">{{VehicleInfo.pricePerMinute.toFixed(2)}} RON</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+                <p class="py-2">Location</p>
+                <p class="py-2 text-muted">
+
+                    <a [href]="getLocation(VehicleInfo.location)">
+                        <mat-icon>location_on</mat-icon>
+                        View location
+                    </a>
+                </p>
             </div>
         </div>
+
     </mat-card-content>
     <mat-card-actions>
         <button mat-button (click)="rentVehicle()" [title]="'edit profile' | uppercase">

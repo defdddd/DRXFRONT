@@ -25,6 +25,7 @@ export class MyrentsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   vehicles !: Map<number, VehicleData>;
+  checked : boolean = false;
 
   constructor(private liveAnnouncer: LiveAnnouncer, private auth: AuthService, private route: Router,
     private rentService: RentService, private vehicleService: VehicleService, private invoiceService: InvoiceService,
@@ -48,7 +49,9 @@ export class MyrentsComponent implements OnInit {
       this.liveAnnouncer.announce('Sorting cleared');
     }
   }
-
+  isActiveFilter(){
+    this.setRents();
+  }
 
   async endRent(vehicle: number, date: number, rent: RentData) {
     var location = await this.getPosition();
@@ -110,8 +113,8 @@ export class MyrentsComponent implements OnInit {
             this.vehicles.set(result.id, result);
           })
         })
-
-        this.dataSource = new MatTableDataSource(data);
+        let value = this.checked ? data.filter(x => x.isActive) : data;
+        this.dataSource = new MatTableDataSource(value);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });

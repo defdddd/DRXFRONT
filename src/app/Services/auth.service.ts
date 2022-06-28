@@ -19,15 +19,12 @@ export class AuthService {
   private CHECK_EMAIL: string = this.URL + "email/";
   private FORGOT_EMAIL: string = this.URL + "SendEmail/forgotPasswordToken/";
   constructor(private http: HttpClient) {
-    ApiURL.URL + "Auth/"
-    this.CheckToken();
    }
 
   Register(user: UserData): Observable<boolean> {
     return this.http.post<boolean>(this.REGISTER_REQUEST, user);
   }
   Auth(auth: AuthData): any {
-    console.log(this.AUTH_REQUEST)
     return this.http.post<TokenData>(this.AUTH_REQUEST, auth).subscribe(data => {
       this.setAuth(data);
       window.location.reload();
@@ -65,12 +62,13 @@ export class AuthService {
     return token.Identifier;
   }
 
-  private CheckToken(): void {
+  public CheckToken(): void {
     if (this.GetToken() !== "NULL") {
-      var token = jwtDecode<Token>(this.GetToken());
-      if (Date.now() >= token.exp * 1000) {
-        this.LogOut();
-      }
+
+      this.http.get<boolean>(this.URL + 'checkLogin').subscribe( x => {
+        if(!x)
+         this.LogOut();
+      });
     }
   }
   LogOut() {

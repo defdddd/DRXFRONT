@@ -22,6 +22,7 @@ export class AppComponent {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   constructor(private authService: AuthService, private observer: BreakpointObserver, private _formBuilder: FormBuilder, private dialog: MatDialog) {
+      this.authService.CheckToken();
       this.IsLogged = this.authService.LoggedIn();
       this.IsAdmin = this.authService.IsAdmin();
   }

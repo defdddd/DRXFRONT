@@ -1,0 +1,14 @@
+.bg-img {
+    background: url(./images/bmw-squad-bike-and-cars.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    min-height: 700px;
+}
+
+.header-text{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -62,7 +62,7 @@
                   <span class="button-text">Users</span>
               </button>
           </mat-list-item>
-          <mat-list-item role="list1item">
+          <mat-list-item *ngIf="false" role="list1item">
               <button mat-button class="button-color" (click)="onSelect()" routerLink="/rents">
                   <mat-icon>rate_review</mat-icon>
                   <span class="button-text">Rents</span>
@@ -91,6 +91,10 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 
-  <mat-toolbar class="footer">Footer</mat-toolbar>
+  <mat-toolbar class="footer">
+      <p>
+        DRX2022
+      </p>
+  </mat-toolbar>
 </ng-container>
 

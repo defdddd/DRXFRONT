@@ -45,6 +45,8 @@ import { VehiclesTableComponent } from './Components/vehicles/vehicles-table/veh
 import { EditVehiclesDialogComponent } from './Dialogs/edit-vehicles-dialog/edit-vehicles-dialog.component';
 import { EditUserDialogComponent } from './Dialogs/edit-user-dialog/edit-user-dialog.component';
 import { EditInvoiceDialogComponent } from './Dialogs/edit-inovice-dialog/edit-invoice-dialog.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -95,6 +97,7 @@ import { EditInvoiceDialogComponent } from './Dialogs/edit-inovice-dialog/edit-i
     MatListModule,
     MatCheckboxModule,
     MatDialogModule,
+    NgChartsModule,
     MatSlideToggleModule
   ],
   providers: [

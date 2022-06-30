@@ -16,8 +16,29 @@ export class VehicleService extends Service<VehicleData> {
    getAvailableVehicles(type: string, model: string){
     return this.http.get<VehicleData[]>(this.URL + `available/${type},${model}`);
    }
+
    getAllSearchByVehicles(type: string, model: string){
     return this.http.get<VehicleData[]>(this.URL + `searchBy/${type},${model}`);
    }
 
+   getCountAll(){
+    return this.http.get<number>(this.URL + 'AllCount');
+   }
+
+   getCountAvailable(){
+    return this.http.get<number>(this.URL + 'availableCount');
+   }
+
+   getAllCarCount(){
+    return this.http.get<number>(this.URL + 'AllCarCount');
+   }
+
+   getAllBikesCount(){
+    return this.http.get<number>(this.URL + 'AllBikesCount');
+   }
+
+   getAllElectricCount(){
+    return this.http.get<number>(this.URL + 'AllElectricCount');
+   }
 }
+

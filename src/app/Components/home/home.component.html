@@ -8,8 +8,7 @@
     </div>
 </div>
 
-
-<div class="container" style="margin-top: 20px;">
+<div class="col" style="margin-top: 20px;">
 
     <div class="row">
         <div class="col">
@@ -17,8 +16,8 @@
                 <mat-card-header>
                     <mat-card-subtitle>
                         <mat-icon>content_copy</mat-icon>
-                        <p class="card-category">Available vehicles</p>
-                        <h3 class="card-title">49/50 <small>GB</small></h3>
+                        <p class="card-category">All our vehicles</p>
+                        <h3 class="card-title">{{AllVehicles}}</h3>
                     </mat-card-subtitle>
                 </mat-card-header>
                 <div class="card-footer">
@@ -35,7 +34,7 @@
                     <mat-card-subtitle>
                         <mat-icon>content_copy</mat-icon>
                         <p class="card-category">Free vehicles</p>
-                        <h3 class="card-title">49/50 <small>GB</small></h3>
+                        <h3 class="card-title">{{AvailableVehicles}} / {{AllVehicles}} </h3>
                     </mat-card-subtitle>
                 </mat-card-header>
                 <div class="card-footer">
@@ -52,7 +51,7 @@
                     <mat-card-subtitle>
                         <mat-icon>content_copy</mat-icon>
                         <p class="card-category">Currently in use</p>
-                        <h3 class="card-title">49/50 <small>GB</small></h3>
+                        <h3 class="card-title">{{AllVehicles - AvailableVehicles}}</h3>
                     </mat-card-subtitle>
                 </mat-card-header>
                 <div class="card-footer">
@@ -70,5 +69,18 @@
 
 
 
+</div>
 
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-md-6">
+                <canvas baseChart [data]="barChartData" [options]="barChartOptions">
+                </canvas>
+        </div>
+
+        <div class="col-md-6">
+                <canvas baseChart [data]="barChartData2" [options]="barChartOptions">
+                </canvas>
+        </div>
+    </div>
 </div>

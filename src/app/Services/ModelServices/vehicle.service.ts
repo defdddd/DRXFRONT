@@ -21,24 +21,29 @@ export class VehicleService extends Service<VehicleData> {
     return this.http.get<VehicleData[]>(this.URL + `searchBy/${type},${model}`);
    }
 
-   getCountAll(){
-    return this.http.get<number>(this.URL + 'AllCount');
+   async getCountAllAsync(){
+    var result = await this.http.get<number>(this.URL + 'AllCount').toPromise();
+    return typeof result !== "undefined" ? result : 0;
    }
 
-   getCountAvailable(){
-    return this.http.get<number>(this.URL + 'availableCount');
+   async getCountAvailableAsync(){
+    var result = await this.http.get<number>(this.URL + 'availableCount').toPromise();
+    return typeof result !== "undefined" ? result : 0;
    }
 
-   getAllCarCount(){
-    return this.http.get<number>(this.URL + 'AllCarCount');
+   async getAllCarCountAsync(){
+    var result = await this.http.get<number>(this.URL + 'AllCarCount').toPromise();
+    return typeof result !== "undefined" ? result : 0;
    }
 
-   getAllBikesCount(){
-    return this.http.get<number>(this.URL + 'AllBikesCount');
+   async getAllBikesCountAsync(){
+    var result =  await this.http.get<number>(this.URL + 'AllBikesCount').toPromise();
+    return typeof result !== "undefined" ? result : 0;
    }
 
-   getAllElectricCount(){
-    return this.http.get<number>(this.URL + 'AllElectricCount');
+   async getAllElectricCountAsync(){
+    var result = await this.http.get<number>(this.URL + 'AllElectricCount').toPromise();
+    return typeof result !== "undefined" ? result : 0;
    }
 }
 

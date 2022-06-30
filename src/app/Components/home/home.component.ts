@@ -9,32 +9,29 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType, Color } from 'cha
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  public barChartData2 !: ChartData<'bar'>;
+  public barChartData !: ChartData<'bar'>;
 
   AllVehicles : number = 0;
   AvailableVehicles : number = 0;
   AllElectric : number = 0;
   AllBikes : number = 0;
   AllCars : number = 0;
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   constructor(private vehicleService: VehicleService) { }
 
-  ngOnInit(): void {
-    this.vehicleService.getCountAll().subscribe(x => this.AllVehicles = x);
-    this.vehicleService.getCountAvailable().subscribe(x => this.AvailableVehicles = x);
-    this.vehicleService.getAllCarCount().subscribe(x => this.AllCars = x);
-    this.vehicleService.getAllElectricCount().subscribe(x => this.AllElectric = x);
-    this.vehicleService.getAllBikesCount().subscribe(x => {
-      this.AllBikes = x;
-      this.setBarChart();
-      this.setBarChart2();
-    });
+  async ngOnInit(): Promise<void> {
+    this.AllVehicles = await this.vehicleService.getCountAllAsync();
+    this.AvailableVehicles = await this.vehicleService.getCountAvailableAsync();
+    this.AllCars = await this.vehicleService.getAllCarCountAsync();
+    this.AllElectric = await this.vehicleService.getAllElectricCountAsync();
+    this.AllBikes = await this.vehicleService.getAllBikesCountAsync();
+    this.setBarChart();
+    this.setBarChart2();
   }
-
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: {
       x: {},
       y: {
@@ -48,7 +45,6 @@ export class HomeComponent implements OnInit {
     }
   };
 
-public barChartData !: ChartData<'bar'>;
 
 private setBarChart(){
   this.barChartData = {
@@ -60,7 +56,6 @@ private setBarChart(){
   };
 }
 
-public barChartData2 !: ChartData<'bar'>;
 
 private setBarChart2(){
   this.barChartData2 = {
@@ -69,7 +64,6 @@ private setBarChart2(){
       { data: [ this.AllBikes ], label: 'Bikes' },
       { data: [ this.AllCars], label: 'Cars' },
       { data: [ this.AllVehicles - (this.AllBikes + this.AllCars)], label: 'Scooters' }
-
     ]
   };
 }

@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
 
 private setBarChart(){
   this.barChartData = {
-    labels: [ 'Activity information'],
+    labels: [ 'Model information'],
     datasets: [
       { data: [ this.AllElectric ], label: 'Electric Vehicles' },
       { data: [ this.AllVehicles - this.AllElectric], label: 'Normal Vehicles' }
@@ -59,7 +59,7 @@ private setBarChart(){
 
 private setBarChart2(){
   this.barChartData2 = {
-    labels: [ 'Activity information'],
+    labels: [ 'Type information'],
     datasets: [
       { data: [ this.AllBikes ], label: 'Bikes' },
       { data: [ this.AllCars], label: 'Cars' },

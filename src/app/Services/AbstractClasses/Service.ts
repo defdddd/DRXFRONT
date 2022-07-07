@@ -4,20 +4,20 @@ import ApiURL from "src/app/Helpers/ApiURL";
 export abstract class Service<T>{
     
   protected URL : string = ApiURL.URL;
-  private INOVICE_URL !: string;
+  private GETALL_URL !: string;
   private INSERT_URL !: string;
   private UPDATE_URL !: string;
 
   constructor(protected http : HttpClient, type : string){
     this.URL += type;
-    this.INOVICE_URL = this.URL + "all";
+    this.GETALL_URL = this.URL + "all";
     this.INSERT_URL = this.URL + "insert";
     this.UPDATE_URL  = this.URL + "update";
   }
 
   //#region crud operations
   getAll() {
-    return this.http.get<T[]>(this.INOVICE_URL);
+    return this.http.get<T[]>(this.GETALL_URL);
   }
 
   add(value: T){

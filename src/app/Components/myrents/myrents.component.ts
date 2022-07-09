@@ -8,6 +8,7 @@ import InvoiceData from 'src/app/Models/InvoiceData';
 import RentData from 'src/app/Models/RentData';
 import VehicleData from 'src/app/Models/VehicleData';
 import { AuthService } from 'src/app/Services/auth.service';
+import { EmailService } from 'src/app/Services/email.service';
 import { BilingService } from 'src/app/Services/ModelServices/biling.service';
 import { InvoiceService } from 'src/app/Services/ModelServices/invoice.service';
 import { RentService } from 'src/app/Services/ModelServices/rent.service';
@@ -27,7 +28,7 @@ export class MyrentsComponent implements OnInit {
   vehicles !: Map<number, VehicleData>;
   checked : boolean = false;
 
-  constructor(private liveAnnouncer: LiveAnnouncer, private auth: AuthService, private route: Router,
+  constructor(private liveAnnouncer: LiveAnnouncer, private auth: AuthService, private route: Router,private emailService: EmailService,
     private rentService: RentService, private vehicleService: VehicleService, private invoiceService: InvoiceService,
     private bilingService: BilingService) {
     this.displayedColumns = ["Id", "Vehicle", 'Date', 'IsActive', 'Action'];
@@ -83,6 +84,9 @@ export class MyrentsComponent implements OnInit {
             rent.lastLocation = JSON.stringify(location);
             this.rentService.update(rent).subscribe(x => {
               this.setRents();
+              this.emailService.finished().subscribe(x => 
+                console.log(x)
+                );
             })
           }
         })

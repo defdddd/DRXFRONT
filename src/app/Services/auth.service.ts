@@ -16,8 +16,6 @@ export class AuthService {
   private URL : string = ApiURL.URL + "Auth/";
   private AUTH_REQUEST: string = this.URL;
   private REGISTER_REQUEST: string = this.URL + "register";
-  private CHECK_EMAIL: string = this.URL + "email/";
-  private FORGOT_EMAIL: string = this.URL + "SendEmail/forgotPasswordToken/";
   constructor(private http: HttpClient) {
    }
 

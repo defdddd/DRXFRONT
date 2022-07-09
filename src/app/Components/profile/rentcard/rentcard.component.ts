@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import RentData from 'src/app/Models/RentData';
 import VehicleData from 'src/app/Models/VehicleData';
 import { AuthService } from 'src/app/Services/auth.service';
+import { EmailService } from 'src/app/Services/email.service';
 import { RentService } from 'src/app/Services/ModelServices/rent.service';
 import { VehicleService } from 'src/app/Services/ModelServices/vehicle.service';
 
@@ -18,7 +19,8 @@ export class RentcardComponent implements OnInit {
   AvailableVehicles: VehicleData[] = [];
   VehicleInfo !: VehicleData;
   Form !: FormGroup
-  constructor(private vehicleService: VehicleService,private authService: AuthService, private formbuilder: FormBuilder, private rentService: RentService) {
+  constructor(private vehicleService: VehicleService, private authService: AuthService,
+    private formbuilder: FormBuilder, private rentService: RentService, private emailService: EmailService) {
     this.VehicleInfo = new VehicleData();
   }
 
@@ -45,8 +47,8 @@ export class RentcardComponent implements OnInit {
   infoVehicle(id: number) {
     this.vehicleService.getById(id).subscribe(value => this.VehicleInfo = value);
   }
-  rentVehicle(){
-    if(this.Form.valid){
+  rentVehicle() {
+    if (this.Form.valid) {
       var rent = new RentData();
       rent.vehicleId = this.VehicleInfo.id;
       rent.userId = this.authService.GetId();
@@ -54,9 +56,13 @@ export class RentcardComponent implements OnInit {
       rent.isActive = true;
       rent.lastLocation = "unknown";
       this.rentService.add(rent).subscribe(x => {
-        if(x)
-        this.Form.reset();
-        this.VehicleInfo = new VehicleData();
+        if (x)
+          this.emailService.rent().subscribe(result => {
+            if (result) {
+              this.Form.reset();
+              this.VehicleInfo = new VehicleData();
+            }
+          })
       });
     }
   }
